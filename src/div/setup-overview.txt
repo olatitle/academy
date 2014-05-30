@@ -8,7 +8,8 @@ SETUP OVERVIEW
 - additional routers must be configured as access points, meaning dhcp must be disabled
 - additional routers must have a fixed ip on the same subnet but outside the ip range of the main router
 - additional routers must be on different channels and, if possible, different bands 
-
+- nginx acts as proxy pass to tomcat, proxy pass to moodle and file server for files, docs, apps, portal
+- the home page can be reached at http://192.168.0.4
 
 MEMORY CONFIG OVERVIEW
 
