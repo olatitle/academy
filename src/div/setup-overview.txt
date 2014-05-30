@@ -7,6 +7,7 @@ SETUP OVERVIEW
 - cisco router has two virtual access points where only one should be enabled
 - additional routers must be configured as access points, meaning dhcp must be disabled
 - additional routers must have a fixed ip on the same subnet but outside the ip range of the main router
+- additional routers must be on different channels and, if possible, different bands 
 
 
 MEMORY CONFIG OVERVIEW
