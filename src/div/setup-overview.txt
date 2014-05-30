@@ -1,0 +1,18 @@
+
+SETUP OVERVIEW
+
+- mac mini (mac) runs postgres and tomcat
+- mac virtual machine ubutu (vm) runs moodle and nginx
+- cisco router is the main router and dhcp server
+- cisco router has two virtual access points where only one should be enabled
+- additional routers must be configured as access points, meaning dhcp must be disabled
+- additional routers must have a fixed ip on the same subnet but outside the ip range of the main router
+
+
+MEMORY CONFIG OVERVIEW
+
+total:       16gb
+os:          1.5gb
+vm:          3gb
+postgresql:  8gb
+tomcat:      3.5gb

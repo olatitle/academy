@@ -1,0 +1,32 @@
+
+cisco linksys
+-------------
+192.168.0.3 > mac / dhis / postgres
+192.168.0.4 > ubuntu vm / nginx / moodle
+
+
+ssid:      AcademyRouter
+login:     admin/DHIS4ever!
+ip:        192.168.0.1
+dhcp:      yes
+ip range:  192.168.0.20 > 192.168.0.250
+
+
+ssid:      Disabled (2.4ghz / eth1) (access point is disabled)
+
+
+ssid:      AcademyAccessPoint0 (5 ghz / eth2)
+dhcp:      no
+channel:   auto
+security:  disabled
+
+
+linksys access point 1
+----------------------
+ssid:      AcademyAccessPoint1
+login:     admin/admin
+ip:        192.168.0.10
+dhcp:      no
+channel:   1
+security:  disabled
+

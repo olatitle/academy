@@ -1,0 +1,13 @@
+
+- postgresql config file
+
+sudo nano /Library/PostgreSQL/9.3/data/postgresql.conf
+
+- tomcat start/stop
+
+/Users/admin/tomcat/bin/startup.sh
+/Users/admin/tomcat/bin/shutdown.sh
+
+- tomcat memory config
+
+/Users/admin/tomcat/bin/setenv.sh
