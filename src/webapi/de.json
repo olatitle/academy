@@ -1,0 +1,8 @@
+{
+  "name": "Cabin fever",
+  "shortName": "Cabin fever",
+  "domainType": "aggregate",
+  "aggregationOperator": "sum",
+  "type": "int"
+}
+
