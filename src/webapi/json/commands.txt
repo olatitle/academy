@@ -1,0 +1,37 @@
+
+- meta data
+
+curl -d @de.json "localhost/dhis/api/dataElements" -X POST -H "Content-Type:application/json" -u admin:district -v
+
+- data value sets
+
+curl -d @dvset.json "localhost/dhis/api/dataValueSets" -H "Content-Type:application/json" -u admin:district -v
+
+- events
+
+curl -d @event.json "localhost/dhis/api/events" -H "Content-Type:application/json" -X POST -u admin:district -v
+
+- events query
+
+localhost/dhis/api/events.json?orgUnit=DiszpKrYNg8
+
+- messages
+
+curl -d @message.json "localhost/dhis/api/messageConversations" -H "Content-Type:application/json" -u admin:district -X POST -v
+
+- interpretations
+
+curl -d "IPT 1 and 2 coverage trend is positive" "localhost/dhis/api/interpretations/chart/PaszHM9rIGA" -H "Content-Type:text/plain" -u admin:district -v
+
+- sql views
+
+localhost/dhis/api/sqlViews/dI68mLkP1wN/data.json
+
+- tracked entity instance
+
+curl -d @tei.json "localhost/dhis/api/trackedEntityInstances" -X POST -H "Content-Type: application/json" -u admin:district -v
+
+- tei query
+
+localhost/dhis/api/trackedEntityInstances.json?ou=DiszpKrYNg8&query=Smith
+
