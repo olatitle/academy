@@ -12,7 +12,10 @@ dhcp:      yes
 ip range:  192.168.0.20 > 192.168.0.250
 
 
-ssid:      Disabled (2.4ghz / eth1) (access point is disabled)
+ssid:      AcademyAccessPoint2 (2.5 ghz / eth2)
+dhcp:      no
+channel:   6
+security:  disabled
 
 
 ssid:      AcademyAccessPoint0 (5 ghz / eth2)
