@@ -24,12 +24,23 @@ channel:   auto
 security:  disabled
 
 
-linksys access point 1
-----------------------
+
+dlink access point
+------------------
+ssid:      AcademyAccessPoint3
+login:     admin/admin
+ip:        192.168.0.11
+dhcp:      no
+channel:   8
+security:  disabled
+
+
+
+linksys access point
+--------------------
 ssid:      AcademyAccessPoint1
 login:     admin/admin
 ip:        192.168.0.10
 dhcp:      no
 channel:   1
 security:  disabled
-
