@@ -1,3 +1,36 @@
+There are two identical instances of the following (Unifi+mac) setup 
+
+Overview: Ubiquiti UniFi AP x 2 + EdgeRouter PoE
+-------------------------------------------
+192.168.1.2 > mac / dhis / postgres / nginx
+
+ssid: DHIS2_1 and DHIS2_2
+router admin: 192.168.1.1 admin:admin or ubnt:ubnt
+dhcp pool: 192.168.2.0/24
+ip range: 192.168.2.20 > 192.168.2.240
+security: none.
+
+About UniFi APs:
+----------------
+The APs are managed using the Ubiquiti UniFi Controller. 
+This is a java server + web interface which runs on your machine and is downloaded 
+from http://www.ubnt.com/download/ ---> Pick UniFi --> UniFi Controller.
+
+Unfortunately, for Ubuntu (linux) installation is a bit cumbersome: 
+http://www.tmrees.com/how-to-install-a-unifi-controller-v3-on-ubuntu-14-04/
+
+Connect to the same (ether)net as the routers. E.g. directly into port eth4
+on the router (assign yourself an 192.168.1.*-IP) and run the software.
+
+NOTE that managing the access points themselves should not really be necessary.
+They are configured to use DHCP from the router and should _JUST_WORK_ as
+long as they are connected to the appropriate ports on the routers.
+
+The APs can be powered using PoE (Power over Ethernet). This is turned on
+in the config which is provided. 
+The 5+2.4 Ghz AP required 48V PoE and the 2.4 only one requires 24V. It
+is therefore IMPORTANT to connect them in their MARKED ports on the router.
+PoE can be reconfigured in the router control interface if need be.
 
 cisco linksys
 -------------
