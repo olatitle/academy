@@ -1,0 +1,43 @@
+SETUP OVERVIEW (NEW NOV 2014 - Ubiquiti + Mac)
+----------------------------------------------
+
+- mac min (mac) runs postgres, tomcat, nginx (and php/moodle if needed)
+- Ubiquiti EdgeRouter is the router and runs DHCP servers for two networks
+- Two networks:
+    server: 192.168.1.0/24 --> Mac
+    client: 192.168.2.0/24 --> Wifi Access Points (same SSID for both)
+- The mac server has a reserved, static IP on 192.168.1.2
+- The home page is reached at http://192.168.1.2
+- Nginx runs as a proxy on mac:80 for tomcat, www, PHP etc.
+
+Connecting it all:
+------------------
+
+All equipment should be named and marked. There are TWO identical 
+setups which are referred to as #1 and #2. Hence, equipment is marked
+with a name + a number tag:
+
+Examples:
+    Router of setup 2:  "Router #2"
+    5/2.4 Ghz AP of setup 1: "5 + 2.4 AP #1"
+
+ONLY interconnect equipment with the same number tag.
+
+Access points:
+    The APs are configured to receive power over ethernet (PoE).
+    The AP Pro unit (marked 5 + 2.4 #x) needs 48V power
+    The AP LR (Long range) unit needs 24V.
+    DO NOT connect an AP to a different port. The results might be bad.
+
+Connections:
+    Ports on the router are marked eth0 -> eth4.
+    APs
+        5+2.4 (48V, blue LED) -> eth2
+        2.4  (24V, orange LED) -> eth3
+    Servers
+        Mac -> eth0
+
+    eth1 is disabled.
+    eth4 is switched with eth2 and eth3 but has no PoE configured.
+    You can connect directly to eth4 to configure the APs (see other docs)
+    or extend the network with another AP, switch, whatever.
