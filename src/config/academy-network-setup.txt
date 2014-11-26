@@ -5,7 +5,7 @@ Overview: Ubiquiti UniFi AP x 2 + EdgeRouter PoE
 192.168.1.2 > mac / dhis / postgres / nginx
 
 ssid: DHIS2_1 and DHIS2_2
-router admin: 192.168.1.1 admin:admin or ubnt:ubnt
+router admin: 192.168.1.1 - admin:admin or ubnt:ubnt
 dhcp pool: 192.168.2.0/24
 ip range: 192.168.2.20 > 192.168.2.240
 security: none.
@@ -25,6 +25,10 @@ on the router (assign yourself an 192.168.1.*-IP) and run the software.
 NOTE that managing the access points themselves should not really be necessary.
 They are configured to use DHCP from the router and should _JUST_WORK_ as
 long as they are connected to the appropriate ports on the routers.
+
+There is a backup of a unify controller config provided (3.2.7.unf). 
+This can be loaded and used to access the AP setup for each network. 
+Remember to select 'site' according to the setup you are working with.
 
 The APs can be powered using PoE (Power over Ethernet). This is turned on
 in the config which is provided. 
