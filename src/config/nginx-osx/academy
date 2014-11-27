@@ -1,5 +1,5 @@
 proxy_cache_path  /var/cache/nginx  keys_zone=dhis:250m  inactive=1d;
-# NOTE: make directory /var/cache_proxy_temp and chown -R it to nobody:wheel
+# NOTE: make directory /var/cache/proxy_temp and chown -R it to nobody:wheel
 proxy_temp_path /var/cache/proxy_temp;
 proxy_redirect  off;
 proxy_set_header  Host             $host;
