@@ -6,7 +6,7 @@ Useful commands:
 
 Run and stop nginx directly (do not use if configured for start-on-boot):
    sudo nginx
-   sudo nginx -s stop
+   sudo nginx -s {stop|quit|reload|reopen}
 
 Note that nginx is configured to run on boot. To load or unload it:
   sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist

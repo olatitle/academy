@@ -1,4 +1,6 @@
 proxy_cache_path  /var/cache/nginx  keys_zone=dhis:250m  inactive=1d;
+# NOTE: make directory /var/cache/proxy_temp and chown -R it to nobody:wheel
+proxy_temp_path /var/cache/proxy_temp;
 proxy_redirect  off;
 proxy_set_header  Host             $host;
 proxy_set_header  X-Real-IP        $remote_addr;
@@ -9,7 +11,7 @@ server {
   client_max_body_size 100M;
   
   location /apps {
-    proxy_pass  http://192.168.1.2/apps;
+    proxy_pass  http://localhost/apps;
   }
 
   location /files {
@@ -44,7 +46,7 @@ server {
   }
 
   location /dhis {
-    proxy_pass http://192.168.1.2:8080/dhis;
+    proxy_pass http://localhost:8080/dhis;
     proxy_cache dhis;
   }
 
