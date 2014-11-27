@@ -10,6 +10,8 @@ dhcp pool: 192.168.2.0/24
 ip range: 192.168.2.20 > 192.168.2.240
 security: none.
 
+Get access to Mac server with 'ssh admin@192.168.1.2'.
+
 About UniFi APs:
 ----------------
 The APs are managed using the Ubiquiti UniFi Controller. 
@@ -36,48 +38,15 @@ The 5+2.4 Ghz AP required 48V PoE and the 2.4 only one requires 24V. It
 is therefore IMPORTANT to connect them in their MARKED ports on the router.
 PoE can be reconfigured in the router control interface if need be.
 
-cisco linksys
--------------
-192.168.0.3 > mac / dhis / postgres
-192.168.0.4 > ubuntu vm / nginx / moodle
+More details on power setup for router and access points:
+The access points get power from the ethernet cables. They can get this directly from the router or from a separate power adapter that has two ethernet ports ( 1 for the router and one for the access point). The 2.4 Ghz access points run on 24v and the 5 Ghz run on 48v. The default power adapter for the router has only 24v so using that one will not allow for direct PoE to the 5 Ghz AP. There is an extra power adapter for the router that has 48v, but we have only got 1 for now. 
 
+Network 1:
+This setup has a separate 48v adapter for the router which allows for PoE (power over the ethernet cable) for the 5 ghz access point (requires 48v).
+So for this network you can connect both APs to the router and provide both network and power through the same cable. BE CAREFUL that you connect the correct APs to the correct ethernet ports as 1 has 24v and the other has 48v, so you can damage the 2.4 GhZ AP if connected to the port providing 48v- 
+ 
+Network 2:
+This network doesn't have the 48v adapter for the router so PoE to the 5 Ghz access point from the router is not possible.
+The 5 Ghz access points needs a separate power adapter that is connected to the UPS (or any power socket) and to the router. From the power adapter there is an ethernet cable out to the Access point (using PoE).
 
-ssid:      AcademyRouter
-login:     admin/DHIS4ever!
-ip:        192.168.0.1
-dhcp:      yes
-ip range:  192.168.0.20 > 192.168.0.250
-
-
-ssid:      AcademyAccessPoint2 (2.5 ghz / eth2)
-dhcp:      no
-channel:   6
-security:  disabled
-
-
-ssid:      AcademyAccessPoint0 (5 ghz / eth2)
-dhcp:      no
-channel:   auto
-security:  disabled
-
-
-
-dlink access point
-------------------
-ssid:      AcademyAccessPoint3
-login:     admin/admin
-ip:        192.168.0.11
-dhcp:      no
-channel:   8
-security:  disabled
-
-
-
-linksys access point
---------------------
-ssid:      AcademyAccessPoint1
-login:     admin/admin
-ip:        192.168.0.10
-dhcp:      no
-channel:   1
-security:  disabled
+There are two identical instances of the following (Unifi+mac) setup. 
