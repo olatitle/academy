@@ -1,0 +1,16 @@
+Running Tomcat on boot in OS X:
+-------------------------------
+
+Boot daemons are configured and ran on OS X using launchctl.
+There needs to be a wrapper script for tomcat startup and shutdown, as
+well as a LaunchDaemon .plist file.
+
+1. Put the file launchd_wrapper.sh in $CATALINA_HOME/bin
+2. Put the file tomcat.plist in /Library/LaunchDaemons
+
+Tomcat should now start on boot.
+
+To start, load manually use:
+    sudo launchctl /Library/LaunchDaemons/tomcat.plist -s {load|unload}
+
+
