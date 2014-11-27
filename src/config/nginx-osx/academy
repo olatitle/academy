@@ -11,7 +11,7 @@ server {
   client_max_body_size 100M;
   
   location /apps {
-    proxy_pass  http://192.168.1.2/apps;
+    proxy_pass  http://localhost/apps;
   }
 
   location /files {
