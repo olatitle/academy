@@ -1,0 +1,15 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
+			      4		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+dhis.academy.	IN	NS	academyserver.dhis.academy.
+dhis.academy.	IN	A	192.168.1.2
+academyserver	IN	A	192.168.1.2
+www	IN	CNAME	dhis.academy.
