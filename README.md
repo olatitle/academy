@@ -1,4 +1,4 @@
-academy
+DHIS2 academy server
 =======
 
-Academy setup and configuration
+DHIS2 academy server setup guide and configuration files. 
