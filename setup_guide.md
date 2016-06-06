@@ -60,6 +60,37 @@ Ethernet cables x3 |
 ## Easy setup
 Setting up an academy server using this part of the guide will require you to clone an existing server image onto your server, using Clonezilla.
 
-The harddisk image can be downloaded from:
-* [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0)
-<add more links>
+Requirements:
+* The Ubuntu Image:
+  * [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0)
+  <add more links>
+* [Clonezilla](http://clonezilla.org/downloads.php)
+* Linux Live USB, use the following links to create it:
+  * [for Windows](http://www.linuxliveusb.com)
+  * [for Mac OSX](https://goo.gl/fgoM5R)
+    <linux version>
+
+The image was created using a 256GB ssd, your harddisk must be equal or greater in size <sjekk info her>
+
+... guide for this ...
+
+## Setup from scratch
+### Server setup
+1. Download Ubuntu Desktop LTS 14.04 or 16.04
+    * Can use Ubuntu Server as well.
+2. Install it to a USB drive:
+    * [for Windows](http://www.linuxliveusb.com)
+    * [for Mac OSX](https://goo.gl/fgoM5R)
+      <linux version>
+3. Install Ubuntu on the server, use:
+    * Username: dhisadmin
+    * Password: dhis
+    * Hostname: academyserver
+4. Install SSH, Postgresql and Nginx using the terminal:  
+```bash
+sudo apt-get install ssh  
+sudo apt-get install postgresql  
+sudo apt-get install nginx
+```
+### DHIS2 Instance setup
+This is a guide for setting up a general DHIS2 academy server. The server will run one DHIS2 instance and Moodle. If you want to add multiple instances or additional services Nginx needs to be configured to handle this.
