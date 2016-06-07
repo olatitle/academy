@@ -46,12 +46,12 @@ WiFi | SSID:password | dhis2:<no password>
 ### Equipment
 **The equipment will be marked with numbers, it is important that only the matching numbers are connected!**
 Equipment | Marked
---------- | ------
+--------- | -------
 EdgeRouter PoE, including power adapter (48V) | #1
 Server: Brix Pro, including power adapter | #2
 WiFi Access Point Dual Band | #3
 WiFi Access Point 2.4GHz | #4
-Ethernet cables x3 |
+Ethernet cables x3 | -
 
 **All of the equipment is marked with numbers, only connect the corresponding numbers so that the equipment is not damaged.**
 
