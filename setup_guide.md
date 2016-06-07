@@ -1,6 +1,12 @@
 # DHIS2 Academy Setup Guide
 
-summary
+This is a guide for setting up a DHIS2 Academy Server. It includes setting up one or more DHIS2 instances and Moodle. The specifications of the server hardware can be changed but is currently:
+
+* Brix Pro GB-BXi7-4770R
+* 16GB RAM
+* 256GB SSD
+
+**This guide should be updated and sent out with the server to reflect the setup of the server. This means including information on all the DHIS2 instances if there are more than one etc.**
 
 ## Content
 1. [Intro](#intro)
@@ -26,7 +32,7 @@ Moodle admin user | username:password | admin:DHIS4ever!
 Moodle Postgres | username:database:password | moodleuser:moodle:dhis
 Router Admin | username:password | ubnt:ubnt
 UniFi controller | username:password | dhis:dhis
-WiFi | SSID:password | dhis2:<no password>
+WiFi | SSID (no password) | dhis2
 
 ## General Information
 * Server IP: 192.168.1.2
@@ -45,8 +51,9 @@ WiFi | SSID:password | dhis2:<no password>
 
 ### Equipment
 **The equipment will be marked with numbers, it is important that only the matching numbers are connected!**
+
 Equipment | Marked
---------- | -------
+--------- | ------:
 EdgeRouter PoE, including power adapter (48V) | #1
 Server: Brix Pro, including power adapter | #2
 WiFi Access Point Dual Band | #3
@@ -55,24 +62,42 @@ Ethernet cables x3 | -
 
 **All of the equipment is marked with numbers, only connect the corresponding numbers so that the equipment is not damaged.**
 
-<insert screenshot here> screenshot
+![Marked equipment](/StandardConfig/images/equipment.jpg)
 
-## Easy setup
-Setting up an academy server using this part of the guide will require you to clone an existing server image onto your server, using Clonezilla.
+## First setup method, Clonezilla
+Setting up an academy server using this part of the guide will require you to clone an existing server image onto your server using Clonezilla.
+> The destination partition must be equal or larger than the source one.
 
 Requirements:
-* The Ubuntu Image:
+* The Ubuntu HDD Image:
   * [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0)
   <add more links>
-* [Clonezilla](http://clonezilla.org/downloads.php)
+* Clonezilla live USB:
+  * [Make a bootable USB](http://clonezilla.org/liveusb.php).
 * Linux Live USB, use the following links to create it:
   * [for Windows](http://www.linuxliveusb.com)
   * [for Mac OSX](https://goo.gl/fgoM5R)
     <linux version>
 
-The image was created using a 256GB ssd, your harddisk must be equal or greater in size <sjekk info her>
+This will mostly be explained in pictures. You will need a bootable Clonezilla USB memory stick and a USB memory stick containing the HDD image (or get it from a SSH server). The pictures will show how to do it using a USB memory stick, but if you want to use a SSH server you can choose that option instead, the program guides you though the process.
 
-... guide for this ...
+Boot the server from the Clonezilla USB stick, choose default settings and then keyboard layout. Continue following the onscreen instructions or the pictures bellow, chose the marked alternatives.
+
+<a href="/StandardConfig/images/clonezilla_setup/1.jpg"><img src="/StandardConfig/images/clonezilla_setup/1.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/3.jpg"><img src="/StandardConfig/images/clonezilla_setup/3.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/4.jpg"><img src="/StandardConfig/images/clonezilla_setup/4.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/5.jpg"><img src="/StandardConfig/images/clonezilla_setup/5.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/6.jpg"><img src="/StandardConfig/images/clonezilla_setup/6.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/7.jpg"><img src="/StandardConfig/images/clonezilla_setup/7.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/8.jpg"><img src="/StandardConfig/images/clonezilla_setup/8.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/9.jpg"><img src="/StandardConfig/images/clonezilla_setup/9.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/10.jpg"><img src="/StandardConfig/images/clonezilla_setup/10.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/11.jpg"><img src="/StandardConfig/images/clonezilla_setup/11.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/12.jpg"><img src="/StandardConfig/images/clonezilla_setup/12.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/13.jpg"><img src="/StandardConfig/images/clonezilla_setup/13.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/14.jpg"><img src="/StandardConfig/images/clonezilla_setup/14.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/15.jpg"><img src="/StandardConfig/images/clonezilla_setup/15.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/16.jpg"><img src="/StandardConfig/images/clonezilla_setup/16.jpg" height="240" width="320" /></a>
 
 ## Setup from scratch
 ### Server setup
