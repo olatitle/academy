@@ -81,23 +81,9 @@ Requirements:
 
 This will mostly be explained in pictures. You will need a bootable Clonezilla USB memory stick and a USB memory stick containing the HDD image (or get it from a SSH server). The pictures will show how to do it using a USB memory stick, but if you want to use a SSH server you can choose that option instead, the program guides you though the process.
 
-Boot the server from the Clonezilla USB stick, choose default settings and then keyboard layout. Continue following the onscreen instructions or the pictures bellow, chose the marked alternatives.
+Boot the server from the Clonezilla USB stick, choose default settings and then keyboard layout. Continue following the onscreen instructions or click the picture below for full picture guide.
 
-<a href="/StandardConfig/images/clonezilla_setup/1.jpg"><img src="/StandardConfig/images/clonezilla_setup/1.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/3.jpg"><img src="/StandardConfig/images/clonezilla_setup/3.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/4.jpg"><img src="/StandardConfig/images/clonezilla_setup/4.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/5.jpg"><img src="/StandardConfig/images/clonezilla_setup/5.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/6.jpg"><img src="/StandardConfig/images/clonezilla_setup/6.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/7.jpg"><img src="/StandardConfig/images/clonezilla_setup/7.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/8.jpg"><img src="/StandardConfig/images/clonezilla_setup/8.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/9.jpg"><img src="/StandardConfig/images/clonezilla_setup/9.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/10.jpg"><img src="/StandardConfig/images/clonezilla_setup/10.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/11.jpg"><img src="/StandardConfig/images/clonezilla_setup/11.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/12.jpg"><img src="/StandardConfig/images/clonezilla_setup/12.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/13.jpg"><img src="/StandardConfig/images/clonezilla_setup/13.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/14.jpg"><img src="/StandardConfig/images/clonezilla_setup/14.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/15.jpg"><img src="/StandardConfig/images/clonezilla_setup/15.jpg" height="240" width="320" /></a>
-<a href="/StandardConfig/images/clonezilla_setup/16.jpg"><img src="/StandardConfig/images/clonezilla_setup/16.jpg" height="240" width="320" /></a>
+<a href="/StandardConfig/images/clonezilla_setup/"><img src="/StandardConfig/images/clonezilla_setup/1.jpg" height="240" width="320" /></a>
 
 ## Setup from scratch
 ### Server setup
