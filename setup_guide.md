@@ -41,7 +41,7 @@ WiFi | SSID (no password) | dhis2
   * Can ssh to it using 'ssh dhisadmin@192.168.1.2'.
 * Domain: dhis.academy
 * Access server through http://192.168.1.2 or http://www.dhis.academy
-* Router admin panel can be accessed through http://192.168.1.2
+* Router admin panel can be accessed through http://192.168.1.1
 * Web content is located at `/var/www/`
 * Clients (connected via WiFi or on port eth4) will be on the 192.168.2.0/24 subnet.
 
@@ -89,7 +89,7 @@ Boot the server from the Clonezilla USB stick, choose default settings and then 
 
 
 ## Setup from scratch
-For this method you can find configurations in the [academy github repository](https://github.com/simjes/academy). When the guide asks you to copy configuration files the root will be this folder.
+For this method you can find configurations in the [academy github repository](https://github.com/simjes/academy). When the guide asks you to copy configuration files, the root will be this folder.
 
 ### Server setup
 1. Download Ubuntu Desktop LTS 14.04 or 16.04
