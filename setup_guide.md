@@ -1,10 +1,6 @@
 # DHIS2 Academy Setup Guide
 
-This is a guide for setting up a DHIS2 Academy Server. It includes setting up one or more DHIS2 instances and Moodle. The specifications of the server hardware can be changed but is currently:
-
-* Brix Pro GB-BXi7-4770R
-* 16GB RAM
-* 256GB SSD
+This is a guide for setting up a DHIS2 Academy Server. It includes setting up one or more DHIS2 instances and Moodle. It is recommended to have at least 8GB RAM and an SSD, the standard configuration will have 16GB RAM and a 180GB SSD or more.
 
 **This guide should be updated and sent out with the server to reflect the setup of the server. This means including information on all the DHIS2 instances if there are more than one etc.**
 
@@ -72,7 +68,7 @@ Setting up an academy server using this part of the guide will require you to cl
 
 Requirements:
 * The Ubuntu HDD Image:
-  * [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0)
+  * [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0) (256GB image)
   <add more links>
 * Clonezilla live USB:
   * [Make a bootable USB](http://clonezilla.org/liveusb.php).
@@ -178,3 +174,4 @@ dhis2-startup dhis
 ```
 
 ### Moodle setup
+Moodle will automatically set up using the provided script (wwwroot http://www.dhis.academy/moodle). For details check the original guide https://goo.gl/eDV8kd and look at the script.
