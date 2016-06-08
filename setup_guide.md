@@ -14,14 +14,12 @@ This is a guide for setting up a DHIS2 Academy Server. It includes setting up on
 
 ## Intro
 
-This guide is split in two parts, the first part is the easy setup where you copy an existing harddisk image to your servers harddisk. The second part describes in detail how to set up a new server fresh.
-
+This guide is split in two parts, the first part is the easy setup where you copy an existing harddisk image to your servers harddisk. The second part describes in detail how to set up a new server fresh.  
 Configuration files are located [here](https://github.com/simjes/academy).
 
 ## Credentials
 
 If you have a DHIS2 Academy server from earlier than 21.05.2016 these credentials might be different, check the folder named 'OldConfig' or the documents you recieved with the server.
-
 This is the standard configuration. Remember to update if there are more DHIS2 instances etc.
 
 Service                          | Format                     | Credentials
@@ -38,11 +36,8 @@ WiFi                             | SSID (no password)         | dhis2
 ## General Information
 
 - Server IP: 192.168.1.2
-
   - Can ssh to it using 'ssh dhisadmin@192.168.1.2'.
-
 - Domain: dhis.academy
-
 - Access server through <http://192.168.1.2> or <http://www.dhis.academy>
 - Router admin panel can be accessed through <http://192.168.1.1>
 - Web content is located at `/var/www/`
@@ -79,15 +74,10 @@ Setting up an academy server using this part of the guide will require you to cl
 Requirements:
 
 - The Ubuntu HDD Image:
-
   - [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0) (256GB image)
-
 - Clonezilla live USB:
-
   - [Make a bootable USB](http://clonezilla.org/liveusb.php).
-
 - Linux Live USB, use the following links to create it:
-
   - [for Windows](http://www.linuxliveusb.com)
   - [for Mac OSX](https://goo.gl/fgoM5R)
 
@@ -104,21 +94,15 @@ For this method you can find configurations in the [academy github repository](h
 ### Server setup
 
 1. Download Ubuntu Desktop LTS 14.04 or 16.04
-
   - Can use Ubuntu Server as well.
-
 2. Install it to a USB drive:
-
   - [for Windows](http://www.linuxliveusb.com)
   - [for Mac OSX](https://goo.gl/fgoM5R)
-
 3. Install Ubuntu on the server, use:
-
   - Username: dhisadmin
   - Password: dhis
   - Hostname: academyserver
-
-4. Install SSH, Postgresql and Nginx using the terminal:
+4. Install SSH, Postgresql and Nginx using the terminal:  
 
   ```bash
   sudo apt-get install ssh  
@@ -126,9 +110,9 @@ For this method you can find configurations in the [academy github repository](h
   sudo apt-get install nginx
   ```
 
-  ### DHIS2 Instance setup
+### DHIS2 Instance setup
 
-  This is a guide for setting up a general DHIS2 academy server. The server will run one DHIS2 instance and Moodle. If you want to add multiple instances or additional services Nginx needs to be configured to handle this.
+This is a guide for setting up a general DHIS2 academy server. The server will run one DHIS2 instance and Moodle. If you want to add multiple instances or additional services Nginx needs to be configured to handle this.
 
 #### Installing the dhis2-tools
 
@@ -165,7 +149,6 @@ sudo ./install.sh
 
 1. Copy `StandardConfig/postgres/dhis-postgres.conf` into the main folder for Postgres. Should look similar to this `/etc/postgresql/9.3/main/dhis-postgres.conf`.
 2. Incude the `dhis-postgres.conf` file in the `/etc/postgresql/9.3/main/postgres.conf`
-
   - Add the following line to the file: `include = 'dhis-postgres.conf'`
 
 #### Set up a new DHIS2 instance
@@ -185,7 +168,6 @@ This method can be used to create multiple DHIS2 instances. In the guide only on
   ```
 
 3. Configure the system to use HTTP instead of HTTPS. Edit `/var/lib/dhis2/<instance name>/conf/server.xml`. Change proxyport to `proxyport="80"` and scheme to `scheme="http"`.
-
 4. (Optional) If you want to restore a database, do it before the next step. If you want an empty database, skip this step. Restoring a database is explained in [Restore a database to a DHIS2 instance](#restore-a-database-to-a-dhis2-instance)
 5. Deploy a WAR file to the DHIS2 instance. The standard command will get the latest stable version, see the man pages for other options.
 
@@ -207,18 +189,19 @@ This method can be used to create multiple DHIS2 instances. In the guide only on
   sudo cp -r StandardConfig/html/* /var/www
   ```
 
-  You should now be able to access your DHIS2 instance in the web browser. Navigate to localhost and click the link to DHIS2\. You can edit `/var/www/index.html` to fit your needs, for example if you have mutliple DHIS2 instances.
+You should now be able to access your DHIS2 instance in the web browser. Navigate to localhost and click the link to DHIS2\.   
+You can edit `/var/www/index.html` to fit your needs, for example if you have mutliple DHIS2 instances.
 
 ##### Restore a database to a DHIS2 instance
 
 It is possible to use an existing database for a DHIS2 instance. Sample databases can be found at the [dhis2 download page](https://www.dhis2.org/downloads). Restore the database before deploying a WAR file.
 
-```bash
-wget https://www.dhis2.org/download/resources/2.23/dhis2-demo.zip
-unzip dhis2-demo.zip
-dhis2-restoredb dhis demo.sql
-dhis2-startup dhis
-```
+  ```bash
+  wget https://www.dhis2.org/download/resources/2.23/dhis2-demo.zip
+  unzip dhis2-demo.zip
+  dhis2-restoredb dhis demo.sql
+  dhis2-startup dhis
+  ```
 
 ### Moodle setup
 
