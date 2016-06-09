@@ -14,7 +14,7 @@ This is a guide for setting up a DHIS2 Academy Server. It includes setting up on
 
 ## Intro
 
-This guide is split in two parts, the first part is the easy setup where you copy an existing harddisk image to your servers harddisk. The second part describes in detail how to set up a new server fresh.  
+This guide is split in two parts, the first part is the easy setup where you copy an existing harddisk image to your servers harddisk. The second part describes in detail how to set up a new server fresh.
 Configuration files are located [here](https://github.com/simjes/academy).
 
 ## Credentials
@@ -63,7 +63,7 @@ Ethernet cables x3                            |      -
 
 **All of the equipment is marked with numbers, only connect the corresponding numbers so that the equipment is not damaged.**
 
-![Marked equipment](/StandardConfig/images/equipment.jpg)
+![Marked equipment](./StandardConfig/images/equipment.jpg)
 
 ## Setup using Clonezilla
 
@@ -85,7 +85,7 @@ This will mostly be explained in pictures. You will need a bootable Clonezilla U
 
 Boot the server from the Clonezilla USB stick, choose default settings and then keyboard layout. Continue following the onscreen instructions or click the picture below for full picture guide.
 
-[![](/StandardConfig/images/clonezilla_setup/1.jpg)](/StandardConfig/images/clonezilla_setup/)
+[![](./StandardConfig/images/clonezilla_setup/1.jpg)](StandardConfig/images/clonezilla_setup/)
 
 ## Setup from scratch
 
@@ -189,7 +189,7 @@ This method can be used to create multiple DHIS2 instances. In the guide only on
   sudo cp -r StandardConfig/html/* /var/www
   ```
 
-You should now be able to access your DHIS2 instance in the web browser. Navigate to localhost and click the link to DHIS2\.   
+You should now be able to access your DHIS2 instance in the web browser. Navigate to localhost and click the link to DHIS2\.
 You can edit `/var/www/index.html` to fit your needs, for example if you have mutliple DHIS2 instances.
 
 ##### Restore a database to a DHIS2 instance
@@ -205,4 +205,130 @@ It is possible to use an existing database for a DHIS2 instance. Sample database
 
 ### Moodle setup
 
-Moodle will automatically set up using the provided script (wwwroot <http://www.dhis.academy/moodle>). For details check the original guide <https://goo.gl/eDV8kd> and look at the script.
+Moodle will automatically set up using the provided script. To set up Moodle run:
+
+```bash
+$ sudo ./StandardConfig/moodle/moodle_setup.sh
+```
+
+If you access Moodle through the IP address of the server or if you set up another domain than `www.dhis.acadaemy` you must change the `wwwroot`in `/var/www/moodle/config.php`.
+Example of the standard configuration:
+
+```php
+$CFG->wwwroot   = 'http://www.dhis.academy/moodle';
+```
+
+For details about the setup check the original guide [here](https://goo.gl/eDV8kd) or look at the setup script.
+
+#### Change user upload limit
+The max upload size in Moodle is by default very low, this needs to be changed in multiple places to increase it. This guide will set the max upload size to 250MB. Edit the following files:
+1. In `/etc/php5/fpm/php.ini` set the following parameters:
+  - `post_max_size = 250M`
+  - `upload_max_filesize = 250M`
+Restart php by running `sudo service php5-fpm restart`
+2. Change `Client_max_body_size 250M;` in the Nginx configuration, this is set to 250MB if you used the provided configuration. Change it in `/etc/nginx/sites-available/academy.conf` and reload the settings by running `sudo service nginx reload`.
+3. You also have to change it in the Moodle settings:
+  - Go to: Site admin -> Security -> Site policies. Change "maximum uploaded file size".
+  - Go to: Site admin -> Plugins -> Activity modules -> assignments -> Submission plugins -> File submissions. Change the max upload size.
+
+### DNS Setup
+DNS server will be running on the server, in this guide we used `academyserver` as the hostname of the server. If you didn’t use `academyserver` as the hostname, replace it with your server’s hostname. The configuration files can be copied from `StandardConfig/dns/`.
+
+1. Add the domain name to `/etc/hosts`:
+
+	```
+	127.0.0.1 localhost
+	128.192.168.1.2 academyserver.dhis.academy academyserver
+	```
+
+2. Install Bind9
+
+	```bash
+	sudo apt-get install bind9
+	```
+
+3. Edit `/etc/bind/named.conf.local`. Add forward and reverse zone:
+
+	```
+	zone "dhis.academy" {
+		type master;
+        file "/etc/bind/db.dhis.academy";
+    };
+	zone "1.168.192.in-addr.arpa" {
+    	type master;
+    	file "/etc/bind/db.192";
+    }
+```
+
+4. Create and fill in the files that the zones from step 3 points to
+	a. `db.dhis.academy`:
+
+        $TTL	604800
+		@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
+			      			4		; Serial
+			 			604800		; Refresh
+			  			86400		; Retry
+						2419200		; Expire
+			 			604800 )	; Negative Cache TTL
+		;
+		dhis.academy.	IN	NS	academyserver.dhis.academy.
+		dhis.academy.	IN	A	192.168.1.2
+		academyserver	IN	A	192.168.1.2
+		www	IN	CNAME	dhis.academy.
+
+	b. `db.192`:
+    	$TTL	604800
+		@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
+			      			3		; Serial
+			 			604800		; Refresh
+			 			 86400		; Retry
+						2419200		; Expire
+			 			604800 )	; Negative Cache TTL
+		;
+				 IN	NS	academyserver.
+
+		;@	   IN	NS	academyserver.
+		2		IN	PTR	academyserver.dhis.academy.
+5. Comment out or delete `include "/etc/bind/named.conf.default-zones";` from the `/etc/bind/named.conf` file.
+For more information on the DNS setup click [here](http://askubuntu.com/questions/330148/how-do-i-do-a-complete-bind9-dns-server-configuration-with-a-hostname).
+
+
+### Network
+![Network topology](./StandardConfig/images/network.png)
+
+#### Edgerouter PoE configuration
+Detailed information and new firmware can be found [here](https://www.ubnt.com/download/edgemax/edgerouter-poe, this guide use firmware version 1.8.0).
+
+Set static IP on your computer, for example IP 192.168.1.100 and Default Gateway 192.168.1.1. If the router has factory settings: Connect your computer to the eth0 port on the Edgerouter and navigate to 192.168.1.1 in your browser. The username and password are both ‘ubnt’. Update the firmware of the router. If the router is preconfigured with our setup you will need to connect to eth4 to access the router and you do not have to set static IP.
+
+The router configuration and firmware can be imported from `StandardConfig/edgerouter/`, but when you import the settings remember to change the MAC address to where the router assigns the static IP to the server.
+
+##### 192.168.1.0/24
+  - Set static IP for the server: 192.168.1.2
+  - Set the Gateway IP to 192.168.1.1, this will be on port eth0.
+
+##### 192.168.2.0/24
+  - Set Gateway IP to 192.168.2.1
+  - Set DHCP for port eth2, eth3 and eth4.
+    - Range 10-255
+  - Set DNS to be 192.168.1.2 (the servers IP).
+  - Set eth1, eth2 and eth3 to be switched.
+  - Set eth2 to use PoE 48V.
+  - Set eth3 to use PoE 24V.
+
+
+#### Acces Point Configuration
+To configure the access points, you need to use the UniFi controller that can be downloaded from [here](https://www.ubnt.com/download/unifi/). When it is installed, plug your computer into the router in port eth4 and start the UniFi controller program. You can import settings from `StandardConfig/unifi/4.8.18.unf`. The settings should be:
+  - Update Firmware
+  - Turn off DHCP
+  - Set wireless SSID: dhis2
+  - Set network to 192.168.2.1/24
+
+
+### Troubleshooting
+#### DHIS2 and Nginx
+Problem | Solution
+------- | --------
+When you attempt to access the site with your browser it does not connect. | Either there is a network problem or nginx is not running. Check first to see if you can ping the host. If not, you have a network problem. If you can ping the site, the most likely problem is that nginx is not installed or is not running. Verify that nginx is up and running and listening on ports 443 and 80 by typing: `sudo netstat -ntlp` You should see the nginx process listening on those 2 ports.
+You can access the site but you see a 502 gateway error in your browser. | This means that nginx is unable to connect to your backend dhis2 instance. Either the instance is not running or your nginx location configuration has an error. Running the same netstat command above should show your instance listening on 127.0.0.1 with a port number typically 8080 or whatever you have configured it as. If it’s not running, try to start it with `dhis2-startup [instance name]`. If it is still not running, check the log file with `dhis2-logview [instance name]` to see if there is any information indicating why it has failed to start. If it is running and you can see it with netstat then you need to check your nginx configuration file to ensure that the location is correctly mapped.
+You can access the site but you see a blank page in your browser. | This usually means that the dhis2 instance is running, but you have forgotten to deploy a war file to it. You need to run dhis2-deploy-war on that instance. See the reference section above for details of options.
