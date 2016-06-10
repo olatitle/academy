@@ -48,6 +48,7 @@ WiFi                             | SSID (no password)         | dhis2
 - Postgresql: `/var/log/postgresql-9.3-main.log`
 - DHIS2: `/var/lib/dhis2/<instance name>/logs/*`
 - Nginx: `/var/log/nginx/*`
+- Router and Access Point logs can be downloaded by running `sudo ./StandardConfig/getLogs.sh`. This will ask for the passwords of the devices the logs will be downloaded from, check the [credentials](#credentials).
 
 ### Equipment
 
@@ -316,13 +317,14 @@ The router configuration and firmware can be imported from `StandardConfig/edger
   - Set eth2 to use PoE 48V.
   - Set eth3 to use PoE 24V.
 
-
 #### Acces Point Configuration
 To configure the access points, you need to use the UniFi controller that can be downloaded from [here](https://www.ubnt.com/download/unifi/). When it is installed, plug your computer into the router in port eth4 and start the UniFi controller program. You can import settings from `StandardConfig/unifi/4.8.18.unf`. The settings should be:
   - Update Firmware
   - Turn off DHCP
   - Set wireless SSID: dhis2
   - Set network to 192.168.2.1/24
+  - The UniFi Pro (dual band) access point will have static IP 192.168.2.5
+  - The UniFi 2.4GHz access point will have static IP 192.168.2.2
 
 
 ### Troubleshooting
