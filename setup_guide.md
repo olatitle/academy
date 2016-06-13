@@ -1,6 +1,6 @@
 # DHIS2 Academy Setup Guide
 
-This is a guide for setting up a DHIS2 Academy Server. It includes setting up one or more DHIS2 instances and Moodle. It is recommended to have at least 8GB RAM and an SSD, the standard configuration will have 16GB RAM and a 180GB SSD or more.
+This is a guide for setting up a DHIS2 Academy Server. It includes setting up one or more DHIS2 instances and Moodle. It is recommended to have at least 8GB RAM and an SSD.
 
 **This guide should be updated and sent out with the server to reflect the setup of the server. This means including information on all the DHIS2 instances if there are more than one etc.**
 
@@ -11,6 +11,8 @@ This is a guide for setting up a DHIS2 Academy Server. It includes setting up on
 3. [General Information](#general-information)
 4. [Setup using Clonezilla](#setup-using-clonezilla)
 5. [Setup from scratch](#setup-from-scratch)
+6. [Network](#network)
+7. [Troubleshooting](#troubleshooting)
 
 ## Intro
 
@@ -19,7 +21,7 @@ Configuration files are located [here](https://github.com/simjes/academy).
 
 ## Credentials
 
-If you have a DHIS2 Academy server from earlier than 21.05.2016 these credentials might be different, check the folder named 'OldConfig' or the documents you recieved with the server.
+If you have a DHIS2 Academy server from earlier than `21.05.2016` these credentials might be different, check the folder named 'OldConfig' or the documents you recieved with the server.
 This is the standard configuration. Remember to update if there are more DHIS2 instances etc.
 
 Service                          | Format                     | Credentials
@@ -77,12 +79,9 @@ Requirements:
 - The Ubuntu HDD Image:
   - [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0) (256GB image)
 - Clonezilla live USB:
-  - [Make a bootable USB](http://clonezilla.org/liveusb.php).
-- Linux Live USB, use the following links to create it:
-  - [for Windows](http://www.linuxliveusb.com)
-  - [for Mac OSX](https://goo.gl/fgoM5R)
+  - [Make a bootable USB](http://clonezilla.org/liveusb.php)
 
-This will mostly be explained in pictures. You will need a bootable Clonezilla USB memory stick and a USB memory stick containing the HDD image (or get it from a SSH server). The pictures will show how to do it using a USB memory stick, but if you want to use a SSH server you can choose that option instead, the program guides you though the process.
+This will mostly be explained in pictures. You will need a bootable Clonezilla USB memory stick and a USB memory stick containing the SSD image (or get it from a SSH server). The pictures will show how to do it using a USB memory stick, but if you want to use a SSH server you can choose that option instead, the program guides you though the process.
 
 Boot the server from the Clonezilla USB stick, choose default settings and then keyboard layout. Continue following the onscreen instructions or click the picture below for full picture guide.
 
@@ -103,11 +102,11 @@ For this method you can find configurations in the [academy github repository](h
   - Username: dhisadmin
   - Password: dhis
   - Hostname: academyserver
-4. Install SSH, Postgresql and Nginx using the terminal:  
+4. Install SSH, Postgresql and Nginx using the terminal:
 
   ```bash
-  sudo apt-get install ssh  
-  sudo apt-get install postgresql  
+  sudo apt-get install ssh
+  sudo apt-get install postgresql
   sudo apt-get install nginx
   ```
 
@@ -219,7 +218,7 @@ Example of the standard configuration:
 $CFG->wwwroot   = 'http://www.dhis.academy/moodle';
 ```
 
-For details about the setup check the original guide [here](https://goo.gl/eDV8kd) or look at the setup script.
+For details about the setup, check the original guide [here](https://goo.gl/eDV8kd) or look at the setup script.
 
 #### Change user upload limit
 The max upload size in Moodle is by default very low, this needs to be changed in multiple places to increase it. This guide will set the max upload size to 250MB. Edit the following files:
@@ -294,30 +293,32 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 For more information on the DNS setup click [here](http://askubuntu.com/questions/330148/how-do-i-do-a-complete-bind9-dns-server-configuration-with-a-hostname).
 
 
-### Network
+## Network
 ![Network topology](./StandardConfig/images/network.png)
 
-#### Edgerouter PoE configuration
-Detailed information and new firmware can be found [here](https://www.ubnt.com/download/edgemax/edgerouter-poe, this guide use firmware version 1.8.0).
+### Edgerouter PoE configuration
+Detailed information and new firmware can be found [here](https://www.ubnt.com/download/edgemax/edgerouter-poe), this guide use firmware version 1.8.0.
 
-Set static IP on your computer, for example IP 192.168.1.100 and Default Gateway 192.168.1.1. If the router has factory settings: Connect your computer to the eth0 port on the Edgerouter and navigate to 192.168.1.1 in your browser. The username and password are both ‘ubnt’. Update the firmware of the router. If the router is preconfigured with our setup you will need to connect to eth4 to access the router and you do not have to set static IP.
+If the router has factory settings: set static IP on your computer, for example IP 192.168.1.100 and Default Gateway 192.168.1.1.  Connect your computer to the eth0 port on the Edgerouter and navigate to 192.168.1.1 in your browser. The username and password are both ‘ubnt’. Update the firmware of the router. If the router is preconfigured with our setup you will need to connect to eth4 to access the router and you do not have to set static IP.
 
-The router configuration and firmware can be imported from `StandardConfig/edgerouter/`, but when you import the settings remember to change the MAC address to where the router assigns the static IP to the server.
+The router configuration and firmware can be imported from `StandardConfig/edgerouter/`. When you import the settings, remember to change the MAC address the static IP address points to, this is the servers MAC address. You can see an example [here](StandardConfig/images/routerscreens/change_hw_addr.png)
 
-##### 192.168.1.0/24
+#### 192.168.1.0/24
   - Set static IP for the server: 192.168.1.2
   - Set the Gateway IP to 192.168.1.1, this will be on port eth0.
 
-##### 192.168.2.0/24
+#### 192.168.2.0/24
   - Set Gateway IP to 192.168.2.1
   - Set DHCP for port eth2, eth3 and eth4.
-    - Range 10-255
+    - Range 10-250
   - Set DNS to be 192.168.1.2 (the servers IP).
   - Set eth1, eth2 and eth3 to be switched.
   - Set eth2 to use PoE 48V.
   - Set eth3 to use PoE 24V.
 
-#### Acces Point Configuration
+You can find pictures of the settings [here](StandardConfig/images/routerscreens/).
+
+### Access Point Configuration
 To configure the access points, you need to use the UniFi controller that can be downloaded from [here](https://www.ubnt.com/download/unifi/). When it is installed, plug your computer into the router in port eth4 and start the UniFi controller program. You can import settings from `StandardConfig/unifi/4.8.18.unf`. The settings should be:
   - Update Firmware
   - Turn off DHCP
@@ -326,9 +327,11 @@ To configure the access points, you need to use the UniFi controller that can be
   - The UniFi Pro (dual band) access point will have static IP 192.168.2.5
   - The UniFi 2.4GHz access point will have static IP 192.168.2.2
 
+You can find pictures of the settings [here](StandardConfig/images/unifiscreens/)
 
-### Troubleshooting
-#### DHIS2 and Nginx
+
+## Troubleshooting
+### DHIS2 and Nginx
 Problem | Solution
 ------- | --------
 When you attempt to access the site with your browser it does not connect. | Either there is a network problem or nginx is not running. Check first to see if you can ping the host. If not, you have a network problem. If you can ping the site, the most likely problem is that nginx is not installed or is not running. Verify that nginx is up and running and listening on ports 443 and 80 by typing: `sudo netstat -ntlp` You should see the nginx process listening on those 2 ports.
