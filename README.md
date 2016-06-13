@@ -21,7 +21,7 @@ Configuration files are located [here](https://github.com/simjes/academy).
 
 ## Credentials
 
-If you have a DHIS2 Academy server from earlier than `21.05.2016` these credentials might be different, check the folder named 'OldConfig' or the documents you recieved with the server.
+If you have a DHIS2 Academy server from earlier than `21.05.2016` these credentials might be different, check documents you recieved with the server.
 This is the standard configuration. Remember to update if there are more DHIS2 instances etc.
 
 Service                          | Format                     | Credentials
