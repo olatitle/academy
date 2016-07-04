@@ -19,7 +19,7 @@ WiFi                             | SSID (no password)         | dhis2
 ## General Information
 
 - Server IP: 192.168.1.2
-  - Can ssh to it using 'ssh dhisadmin@192.168.1.2'.
+  - Can ssh to it using `ssh dhisadmin@192.168.1.2`.
 - Domain: dhis.academy
 - Access server through <http://192.168.1.2> or <http://www.dhis.academy>
 - Router admin panel can be accessed through <http://192.168.1.1>
