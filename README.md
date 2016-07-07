@@ -77,7 +77,7 @@ Setting up an academy server using this part of the guide will require you to cl
 Requirements:
 
 - The Ubuntu HDD Image:
-  - [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0) (256GB image, Ubuntu 14.04)
+  - [Dropbox](https://www.dropbox.com/sh/epyf0vgpxidjvxv/AACUUUDo2jzGrxjUCl7QywaLa?dl=0) (256GB image, Ubuntu 14.04)
 - Clonezilla live USB:
   - [Make a bootable USB](http://clonezilla.org/liveusb.php)
 

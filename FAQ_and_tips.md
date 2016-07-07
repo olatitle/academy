@@ -35,6 +35,22 @@ WiFi                             | SSID (no password)         | dhis2
 
 You can also look at the log of a DHIS2 instance by using `dhis2-logtail <instance name>` or `dhis2-logview <instance name>`
 
+### Equipment
+
+**The equipment will be marked with numbers, it is important that only the matching numbers are connected!**
+
+Equipment                                     | Marked
+--------------------------------------------- | -----:
+EdgeRouter PoE, including power adapter (48V) |     #1
+Server, including power adapter				  |     #2
+WiFi Access Point Dual Band                   |     #3
+WiFi Access Point 2.4GHz                      |     #4
+Ethernet cables x3                            |      -
+
+**All of the equipment is marked with numbers, only connect the corresponding numbers so that the equipment is not damaged.**
+
+![Marked equipment](./StandardConfig/images/equipment.jpg)
+
 ## Server
  - Shut the server down using `sudo poweroff`
  - Reboot server `sudo reboot`
