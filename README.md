@@ -277,6 +277,7 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 		www	IN	CNAME	dhis.academy.
 
 	b. `db.192`:
+
     	$TTL	604800
 		@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
 			      			3		; Serial
@@ -288,6 +289,7 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 				 IN	NS	academyserver.
 		;@	   IN	NS	academyserver.
 		2		IN	PTR	academyserver.dhis.academy.
+
 5. Comment out or delete `include "/etc/bind/named.conf.default-zones";` from the `/etc/bind/named.conf` file.
 For more information on the DNS setup click [here](http://askubuntu.com/questions/330148/how-do-i-do-a-complete-bind9-dns-server-configuration-with-a-hostname).
 
@@ -296,11 +298,11 @@ For more information on the DNS setup click [here](http://askubuntu.com/question
 ![Network topology](./StandardConfig/images/network.png)
 
 ### Edgerouter PoE configuration
-Detailed information and new firmware can be found [here](https://www.ubnt.com/download/edgemax/edgerouter-poe), this guide use firmware version 1.8.0.
+Detailed information and new firmware can be found [here](https://www.ubnt.com/download/edgemax/edgerouter-poe).
 
 If the router has factory settings: set static IP on your computer, for example IP 192.168.1.100 and Default Gateway 192.168.1.1.  Connect your computer to the eth0 port on the Edgerouter and navigate to 192.168.1.1 in your browser. The username and password are both ‘ubnt’. Update the firmware of the router. If the router is preconfigured with our setup you will need to connect to eth4 to access the router and you do not have to set static IP.
 
-The router configuration and firmware can be imported from `StandardConfig/edgerouter/`. When you import the settings, remember to change the MAC address the static IP address points to, this is the servers MAC address. You can see an example [here](StandardConfig/images/routerscreens/change_hw_addr.png)
+The router configuration can be imported from `StandardConfig/edgerouter/`. When you import the settings remember to change the MAC address of where the static IP should be assigned , this is the servers MAC address. You can see an example [here](StandardConfig/images/routerscreens/change_hw_addr.png)
 
 #### 192.168.1.0/24
   - Set static IP for the server: 192.168.1.2
