@@ -8,7 +8,7 @@ This is the standard configuration. Remember to update if there are more DHIS2 i
 Service                          | Format                     | Credentials
 -------------------------------- | -------------------------- | --------------------------------
 Ubuntu Server (logon/ssh)        | username:password          | dhisadmin:dhis
-Postgres root                    | command                    | $ sudo -u postgres psql postgres
+Postgres root                    | command                    | sudo -u postgres psql postgres
 DHIS2 instance and database name | name                       | dhis
 Moodle admin user                | username:password          | admin:DHIS4ever!
 Moodle Postgres                  | username:database:password | moodleuser:moodle:dhis
@@ -21,7 +21,7 @@ WiFi                             | SSID (no password)         | dhis2
 - Server IP: 192.168.1.2
   - Can ssh to it using `ssh dhisadmin@192.168.1.2`.
 - Domain: dhis.academy
-- Access server through <http://192.168.1.2> or <http://www.dhis.academy>
+- Access server through <http://192.168.1.2> or <http://dhis.academy>
 - Router admin panel can be accessed through <http://192.168.1.1>
 - Web content is located at `/var/www/`
 - Clients (connected via WiFi or on port eth4) will be on the 192.168.2.0/24 subnet.
@@ -31,7 +31,7 @@ WiFi                             | SSID (no password)         | dhis2
 - Postgresql: `/var/log/postgresql-9.3-main.log`
 - DHIS2: `/var/lib/dhis2/<instance name>/logs/*`
 - Nginx: `/var/log/nginx/*`
-- Router and Access Point logs can be downloaded by running `sudo ./StandardConfig/getLogs.sh`. This will ask for the passwords of the devices the logs will be downloaded from, check the [credentials](#credentials).
+- Router and access point logs can be downloaded by running `./StandardConfig/getLogs.sh`. This will ask for the passwords of the devices the logs will be downloaded from, check the [credentials](#credentials).
 
 You can also look at the log of a DHIS2 instance by using `dhis2-logtail <instance name>` or `dhis2-logview <instance name>`
 
@@ -53,11 +53,11 @@ You can also look at the log of a DHIS2 instance by using `dhis2-logtail <instan
 
 ## DHIS2
  - DHIS2 instances will automatically start when the server starts.
- - You can check available man pages with `$ apropos dhis`
+ - You can check available man pages with `apropos dhis`
 
 ### Start and stop instance
- - Start: `$ dhis2-startup <instance name>`
- - Shut down: `$ dhis2-shutdown <instance name>`
+ - Start: `dhis2-startup <instance name>`
+ - Shut down: `dhis2-shutdown <instance name>`
 
 ### Restore a database to a DHIS2 instance
 It is possible to use an existing database for a DHIS2 instance. Sample databases can be found at the [dhis2 download page](https://www.dhis2.org/downloads). Restore the database before deploying a WAR file.
