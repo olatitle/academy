@@ -27,7 +27,7 @@ This is the standard configuration. Remember to update if there are more DHIS2 i
 Service                          | Format                     | Credentials
 -------------------------------- | -------------------------- | --------------------------------
 Ubuntu Server (logon/ssh)        | username:password          | dhisadmin:dhis
-Postgres root                    | command                    | $ sudo -u postgres psql postgres
+Postgres root                    | command                    | sudo -u postgres psql postgres
 DHIS2 instance and database name | name                       | dhis
 Moodle admin user                | username:password          | admin:DHIS4ever!
 Moodle Postgres                  | username:database:password | moodleuser:moodle:dhis
@@ -40,7 +40,7 @@ WiFi                             | SSID (no password)         | dhis2
 - Server IP: 192.168.1.2
   - Can ssh to it using `ssh dhisadmin@192.168.1.2`.
 - Domain: dhis.academy
-- Access server through <http://192.168.1.2> or <http://www.dhis.academy>
+- Access server through <http://192.168.1.2> or <http://dhis.academy>
 - Router admin panel can be accessed through <http://192.168.1.1>
 - Web content is located at `/var/www/`
 - Clients (connected via WiFi or on port eth4) will be on the 192.168.2.0/24 subnet.
@@ -50,7 +50,7 @@ WiFi                             | SSID (no password)         | dhis2
 - Postgresql: `/var/log/postgresql-9.3-main.log`
 - DHIS2: `/var/lib/dhis2/<instance name>/logs/*`
 - Nginx: `/var/log/nginx/*`
-- Router and Access Point logs can be downloaded by running `sudo ./StandardConfig/getLogs.sh`. This will ask for the passwords of the devices the logs will be downloaded from, check the [credentials](#credentials).
+- Router and access point logs can be downloaded by running `sudo ./StandardConfig/getLogs.sh`. This will ask for the passwords of the devices the logs will be downloaded from, check the [credentials](#credentials).
 
 ### Equipment
 
@@ -59,7 +59,7 @@ WiFi                             | SSID (no password)         | dhis2
 Equipment                                     | Marked
 --------------------------------------------- | -----:
 EdgeRouter PoE, including power adapter (48V) |     #1
-Server: Brix Pro, including power adapter     |     #2
+Server, including power adapter				  |     #2
 WiFi Access Point Dual Band                   |     #3
 WiFi Access Point 2.4GHz                      |     #4
 Ethernet cables x3                            |      -
@@ -77,7 +77,7 @@ Setting up an academy server using this part of the guide will require you to cl
 Requirements:
 
 - The Ubuntu HDD Image:
-  - [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0) (256GB image)
+  - [Dropbox](https://www.dropbox.com/sh/ldus8wg06sw6vtu/AAClEz1EzW0U67dOXOafdOzea?dl=0) (256GB image, Ubuntu 14.04)
 - Clonezilla live USB:
   - [Make a bootable USB](http://clonezilla.org/liveusb.php)
 
@@ -120,12 +120,12 @@ This is a guide for setting up a general DHIS2 academy server. The server will r
 
 Install git and clone the dhis2-tools repository. Install the tools using the provided script.
 
-```bash
-sudo apt-get install git
-git clone https://github.com/dhis2/dhis2-tools.git
-cd dhis2-tools
-sudo ./install.sh
-```
+  ```bash
+  sudo apt-get install git
+  git clone https://github.com/dhis2/dhis2-tools.git
+  cd dhis2-tools
+  sudo ./install.sh
+  ```
 
 ##### Option 2
 
@@ -207,16 +207,16 @@ It is possible to use an existing database for a DHIS2 instance. Sample database
 
 Moodle will automatically set up using the provided script. To set up Moodle run:
 
-```bash
-$ sudo ./StandardConfig/moodle/moodle_setup.sh
-```
+  ```bash
+  sudo ./StandardConfig/moodle/moodle_setup.sh
+  ```
 
 If you access Moodle through the IP address of the server or if you set up another domain than `www.dhis.acadaemy` you must change the `wwwroot`in `/var/www/moodle/config.php`.
 Example of the standard configuration:
 
-```php
-$CFG->wwwroot   = 'http://www.dhis.academy/moodle';
-```
+  ```php
+  $CFG->wwwroot   = 'http://www.dhis.academy/moodle';
+  ```
 
 For details about the setup, check the original guide [here](https://goo.gl/eDV8kd) or look at the setup script.
 
@@ -258,11 +258,11 @@ DNS server will be running on the server, in this guide we used `academyserver` 
     	type master;
     	file "/etc/bind/db.192";
     }
-```
+    ```
 
 4. Create and fill in the files that the zones from step 3 points to
 	a. `db.dhis.academy`:
-
+        ```
         $TTL	604800
 		@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
 			      			4		; Serial
@@ -275,8 +275,9 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 		dhis.academy.	IN	A	192.168.1.2
 		academyserver	IN	A	192.168.1.2
 		www	IN	CNAME	dhis.academy.
-
+        ```
 	b. `db.192`:
+        ```
     	$TTL	604800
 		@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
 			      			3		; Serial
@@ -289,6 +290,7 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 
 		;@	   IN	NS	academyserver.
 		2		IN	PTR	academyserver.dhis.academy.
+        ```
 5. Comment out or delete `include "/etc/bind/named.conf.default-zones";` from the `/etc/bind/named.conf` file.
 For more information on the DNS setup click [here](http://askubuntu.com/questions/330148/how-do-i-do-a-complete-bind9-dns-server-configuration-with-a-hostname).
 
@@ -319,7 +321,7 @@ The router configuration and firmware can be imported from `StandardConfig/edger
 You can find pictures of the settings [here](StandardConfig/images/routerscreens/).
 
 ### Access Point Configuration
-To configure the access points, you need to use the UniFi controller that can be downloaded from [here](https://www.ubnt.com/download/unifi/). When it is installed, plug your computer into the router in port eth4 and start the UniFi controller program. You can import settings from `StandardConfig/unifi/4.8.18.unf`. The settings should be:
+To configure the access points, you need to use the UniFi controller that can be downloaded from [here](https://www.ubnt.com/download/unifi/). When it is installed, plug your computer into the router in port eth4 and start the UniFi controller program. The settings should be:
   - Update Firmware
   - Turn off DHCP
   - Set wireless SSID: dhis2
@@ -327,7 +329,7 @@ To configure the access points, you need to use the UniFi controller that can be
   - The UniFi Pro (dual band) access point will have static IP 192.168.2.5
   - The UniFi 2.4GHz access point will have static IP 192.168.2.2
 
-You can find pictures of the settings [here](StandardConfig/images/unifiscreens/)
+You can find pictures of the settings [here](StandardConfig/images/unifiscreens/).
 
 
 ## Troubleshooting
@@ -337,3 +339,8 @@ Problem | Solution
 When you attempt to access the site with your browser it does not connect. | Either there is a network problem or nginx is not running. Check first to see if you can ping the host. If not, you have a network problem. If you can ping the site, the most likely problem is that nginx is not installed or is not running. Verify that nginx is up and running and listening on ports 443 and 80 by typing: `sudo netstat -ntlp` You should see the nginx process listening on those 2 ports.
 You can access the site but you see a 502 gateway error in your browser. | This means that nginx is unable to connect to your backend dhis2 instance. Either the instance is not running or your nginx location configuration has an error. Running the same netstat command above should show your instance listening on 127.0.0.1 with a port number typically 8080 or whatever you have configured it as. If it’s not running, try to start it with `dhis2-startup [instance name]`. If it is still not running, check the log file with `dhis2-logview [instance name]` to see if there is any information indicating why it has failed to start. If it is running and you can see it with netstat then you need to check your nginx configuration file to ensure that the location is correctly mapped.
 You can access the site but you see a blank page in your browser. | This usually means that the dhis2 instance is running, but you have forgotten to deploy a war file to it. You need to run dhis2-deploy-war on that instance. See the reference section above for details of options.
+
+###DHIS2 automatic startup
+If the DHIS2 instances doesn't automatically start you can change the following: 
+In the file located at `$JAVA_PATH/jre/lib/security/java.security` change `securerandom.source=file:/dev/urandom` to `securerandom.source=file:/dev/./urandom`.
+More information about this bug [here](http://stackoverflow.com/questions/26431922/tomcat7-starts-too-late-on-ubuntu-14-04-x64-digitalocean).
