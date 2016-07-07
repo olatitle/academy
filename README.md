@@ -262,7 +262,6 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 
 4. Create and fill in the files that the zones from step 3 points to
 	a. `db.dhis.academy`:
-        ```
         $TTL	604800
 		@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
 			      			4		; Serial
@@ -275,9 +274,7 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 		dhis.academy.	IN	A	192.168.1.2
 		academyserver	IN	A	192.168.1.2
 		www	IN	CNAME	dhis.academy.
-        ```
 	b. `db.192`:
-        ```
     	$TTL	604800
 		@	IN	SOA	academyserver.dhis.academy. dhisadmin.dhis.academy. (
 			      			3		; Serial
@@ -287,10 +284,8 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 			 			604800 )	; Negative Cache TTL
 		;
 				 IN	NS	academyserver.
-
 		;@	   IN	NS	academyserver.
 		2		IN	PTR	academyserver.dhis.academy.
-        ```
 5. Comment out or delete `include "/etc/bind/named.conf.default-zones";` from the `/etc/bind/named.conf` file.
 For more information on the DNS setup click [here](http://askubuntu.com/questions/330148/how-do-i-do-a-complete-bind9-dns-server-configuration-with-a-hostname).
 
