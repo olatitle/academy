@@ -300,7 +300,7 @@ For more information on the DNS setup click [here](http://askubuntu.com/question
 ### Edgerouter PoE configuration
 Detailed information and new firmware can be found [here](https://www.ubnt.com/download/edgemax/edgerouter-poe).
 
-If the router has factory settings: set static IP on your computer, for example IP 192.168.1.100 and Default Gateway 192.168.1.1.  Connect your computer to the eth0 port on the Edgerouter and navigate to 192.168.1.1 in your browser. The username and password are both ‘ubnt’. Update the firmware of the router. If the router is preconfigured with our setup you will need to connect to eth4 to access the router and you do not have to set static IP.
+If the router has factory settings: set static IP on your computer, for example IP 192.168.1.100 and Default Gateway 192.168.1.1.  Connect your computer to the eth0 port on the Edgerouter and navigate to 192.168.1.1 in your browser. The username and password are both `ubnt`. Update the firmware of the router. If the router is preconfigured with our setup you will need to connect to eth4 to access the router and you do not have to set static IP.
 
 The router configuration can be imported from `StandardConfig/edgerouter/`. When you import the settings remember to change the MAC address of where the static IP should be assigned , this is the servers MAC address. You can see an example [here](StandardConfig/images/routerscreens/change_hw_addr.png).
 
