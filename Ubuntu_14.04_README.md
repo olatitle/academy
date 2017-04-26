@@ -1,4 +1,4 @@
-# DHIS2 Academy Setup Guide - Ubuntu 16.04
+# DHIS2 Academy Setup Guide - Ubuntu 14.04
 
 This is a guide for setting up a DHIS2 Academy Server. It includes setting up one or more DHIS2 instances and Moodle. It is recommended to have at least 8GB RAM and an SSD.
 
@@ -47,7 +47,7 @@ WiFi                             | SSID (no password)         | dhis2
 
 ### Logs
 
-- Postgresql: `/var/log/postgresql-9.5-main.log`
+- Postgresql: `/var/log/postgresql-9.3-main.log`
 - DHIS2: `/var/lib/dhis2/<instance name>/logs/*`
 - Nginx: `/var/log/nginx/*`
 - Router and access point logs can be downloaded by running `./StandardConfig/getLogs.sh`. This will ask for the passwords of the devices the logs will be downloaded from, check the [credentials](#credentials).
@@ -76,8 +76,8 @@ Setting up an academy server using this part of the guide will require you to cl
 
 Requirements:
 
-- The Ubuntu Image:
-  - [Dropbox](https://www.dropbox.com/sh/1294l561rmdmqni/AACaVn79WHTzfuhkWfnjPNlca?dl=0) (256GB image, Ubuntu 16.04)
+- The Ubuntu HDD Image:
+  - [Dropbox](https://www.dropbox.com/sh/epyf0vgpxidjvxv/AACUUUDo2jzGrxjUCl7QywaLa?dl=0) (256GB image, Ubuntu 14.04)
 - Clonezilla live USB:
   - [Make a bootable USB](http://clonezilla.org/liveusb.php)
 
@@ -93,7 +93,8 @@ For this method you can find configurations in the [academy github repository](h
 
 ### Server setup
 
-1. Download Ubuntu Desktop LTS 16.04
+1. Download Ubuntu Desktop LTS 14.04 or 16.04
+  - Can use Ubuntu Server as well.
 2. Install it to a USB drive:
   - [for Windows](http://www.linuxliveusb.com)
   - [for Mac OSX](https://goo.gl/fgoM5R)
@@ -104,7 +105,6 @@ For this method you can find configurations in the [academy github repository](h
 4. Install SSH, Postgresql and Nginx using the terminal:
 
   ```bash
-  $ sudo apt-get update
   $ sudo apt-get install -y ssh postgresql nginx git
   ```
 
@@ -119,21 +119,21 @@ This is a guide for setting up a general DHIS2 academy server. The server will r
   $ sudo chmod a+x install.sh
   $ sudo ./install.sh
   ```
-  
+
 #### Postgres configuration
 
 1. Go to `http://pgtune.leopard.in.ua/` and generate settings.
-2. Copy the settings into `/etc/postgresql/9.5/main/dhis-postgres.conf`.
-3. Include the configuration in the postgres config file `/etc/postgresql/9.5/main/postgres.conf`. At the bottom of the file write: `include = 'dhis-postgres.conf'`.
+2. Copy the settings into `/etc/postgresql/9.3/main/dhis-postgres.conf`.
+3. Include the configuration in the postgres config file `/etc/postgresql/9.3/main/postgres.conf`. At the bottom of the file write: `include = 'dhis-postgres.conf'`.
 
 #### Set up a new DHIS2 instance
 
-This method can be used to create multiple DHIS2 instances. In the guide only one instance will be set up. This guide uses the credentials described in the [credentials section](#credentials). For more information on the different commands see the man pages. Use `$ apropos dhis` to see which man pages are available.
+This method can be used to create multiple DHIS2 instances. In the guide only one instance will be set up. This guide uses the credentials described in the [credentials section](#credentials). For more information on the different commands see the man pages. Use `apropos dhis` to see which man pages are available.
 
 1. Create a DHIS2 admin account.
 
   ```bash
-  $ sudo dhis2-create-admin dhisadmin
+  $ dhis2-create-admin dhisadmin
   ```
 
 2. Create a new DHIS2 instance. The default port is 8080, you can change this by using the `-p portNumber` paramteter. Use the `-p` paramterer to create multiple instances, but remember to also configure Nginx for all the instances.
@@ -153,7 +153,7 @@ This method can be used to create multiple DHIS2 instances. In the guide only on
 6. Configure Nginx with `StandardConfig/nginx/academy.conf`
 
   ```bash
-  $ sudo dhis2-nginx academy1604.conf
+  $ sudo dhis2-nginx academy1404.conf
   ```
 
 7. Create the web folder and copy the provided content from `StandardConfig/html/`.
@@ -164,7 +164,7 @@ This method can be used to create multiple DHIS2 instances. In the guide only on
   $ sudo cp -r StandardConfig/html/* /var/www
   ```
 
-You should now be able to access your DHIS2 instance in the web browser. Navigate to localhost and click the link to DHIS2.
+You should now be able to access your DHIS2 instance in the web browser. Navigate to localhost and click the link to DHIS2\.
 You can edit `/var/www/index.html` to fit your needs, for example if you have mutliple DHIS2 instances.
 
 ##### Restore a database to a DHIS2 instance
@@ -183,7 +183,7 @@ It is possible to use an existing database for a DHIS2 instance. Sample database
 Moodle will automatically set up using the provided script. To set up Moodle run:
 
   ```bash
-  $ sudo ./StandardConfig/moodle/moodle_setup1604.sh
+  $ sudo ./StandardConfig/moodle/moodle_setup1404.sh
   ```
 
 If you access Moodle through the IP address of the server or if you set up another domain than `www.dhis.acadaemy` you must change the `wwwroot`in `/var/www/moodle/config.php`.
@@ -196,16 +196,15 @@ Example of the standard configuration:
 For details about the setup, check the original guide [here](https://goo.gl/eDV8kd) or look at the setup script.
 
 #### Change user upload limit
-The max upload size in Moodle is by default very low, this needs to be changed in multiple places to increase it. This guide will set the max upload size to 250MB. Edit the following files:  
-
+The max upload size in Moodle is by default very low, this needs to be changed in multiple places to increase it. This guide will set the max upload size to 250MB. Edit the following files:
 1. In `/etc/php5/fpm/php.ini` set the following parameters:
   - `post_max_size = 250M`
   - `upload_max_filesize = 250M`
 Restart php by running `sudo service php5-fpm restart`
-2. Change `Client_max_body_size 250M;` in the Nginx configuration, this is set to 250MB if you used the provided configuration. Change it in `/etc/nginx/sites-available/academy.conf` and reload the settings by running `$ sudo service nginx reload`.
+2. Change `Client_max_body_size 250M;` in the Nginx configuration, this is set to 250MB if you used the provided configuration. Change it in `/etc/nginx/sites-available/academy.conf` and reload the settings by running `sudo service nginx reload`.
 3. You also have to change it in the Moodle settings:
-  - Go to: Site admin > Security > Site policies. Change "maximum uploaded file size".
-  - Go to: Site admin > Plugins > Activity modules > assignments > Submission plugins > File submissions. Change the max upload size.
+  - Go to: Site admin -> Security -> Site policies. Change "maximum uploaded file size".
+  - Go to: Site admin -> Plugins -> Activity modules -> assignments -> Submission plugins -> File submissions. Change the max upload size.
 
 ### DNS Setup
 DNS server will be running on the server, in this guide we used `academyserver` as the hostname of the server. If you didn’t use `academyserver` as the hostname, replace it with your server’s hostname. The configuration files can be copied from `StandardConfig/dns/`.
@@ -220,7 +219,7 @@ DNS server will be running on the server, in this guide we used `academyserver` 
 2. Install Bind9
 
 	```bash
-	$ sudo apt-get install bind9
+	sudo apt-get install bind9
 	```
 
 3. Edit `/etc/bind/named.conf.local`. Add forward and reverse zone:
