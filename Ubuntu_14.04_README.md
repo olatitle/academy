@@ -294,14 +294,17 @@ The router configuration can be imported from `StandardConfig/edgerouter/`. When
 
 You can find pictures of the settings [here](StandardConfig/images/routerscreens/).
 
-### Access Point Configuration
-To configure the access points, you need to use the UniFi controller that can be downloaded from [here](https://www.ubnt.com/download/unifi/). When it is installed, plug your computer into the router in port eth4 and start the UniFi controller program. The settings should be:
+### Access Point Configuration  
+
+To configure the access points, you need to use the UniFi controller that can be downloaded from [here](https://www.ubnt.com/download/unifi/). When it is installed, plug your computer into the router in port eth4 and start the UniFi controller program. The settings should be:  
+
   - Update Firmware
   - Turn off DHCP
   - Set wireless SSID: dhis2
   - Set network to 192.168.2.1/24
-  - The UniFi Pro (dual band) access point will have static IP 192.168.2.5
-  - The UniFi 2.4GHz access point will have static IP 192.168.2.2
+  - Static IP is only necessary if you want to use `StandardConfig/getLogs.sh` to pull the logs to the server:
+  	- The UniFi Pro (dual band) access point will have static IP 192.168.2.5
+  	- The UniFi 2.4GHz access point will have static IP 192.168.2.2
 
 You can find pictures of the settings [here](StandardConfig/images/unifiscreens/).
 
