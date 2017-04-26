@@ -314,7 +314,7 @@ When you attempt to access the site with your browser it does not connect. | Eit
 You can access the site but you see a 502 gateway error in your browser. | This means that nginx is unable to connect to your backend dhis2 instance. Either the instance is not running or your nginx location configuration has an error. Running the same netstat command above should show your instance listening on 127.0.0.1 with a port number typically 8080 or whatever you have configured it as. If it’s not running, try to start it with `dhis2-startup [instance name]`. If it is still not running, check the log file with `dhis2-logview [instance name]` to see if there is any information indicating why it has failed to start. If it is running and you can see it with netstat then you need to check your nginx configuration file to ensure that the location is correctly mapped.
 You can access the site but you see a blank page in your browser. | This usually means that the dhis2 instance is running, but you have forgotten to deploy a war file to it. You need to run dhis2-deploy-war on that instance. See the reference section above for details of options.
 
-###DHIS2 automatic startup
+### DHIS2 automatic startup
 If the DHIS2 instances doesn't automatically start you can change the following: 
 In the file located at `$JAVA_PATH/jre/lib/security/java.security` change `securerandom.source=file:/dev/urandom` to `securerandom.source=file:/dev/./urandom`.
 More information about this bug [here](http://stackoverflow.com/questions/26431922/tomcat7-starts-too-late-on-ubuntu-14-04-x64-digitalocean).
