@@ -311,6 +311,16 @@ You can find pictures of the settings [here](StandardConfig/images/unifiscreens/
 
 
 ## Troubleshooting
+
+
+### Router
+#### Network not accessible
+**This should happen automatically when restarting the Router, but I will leave it in just in case**
+If the network is not accessible (WiFi access point blinking), try releasing all the DHCP leases. To do so:
+ 1. Login to the router (<http://192.168.1.1>) with the provided [credentials](#credentials).
+ 2. Access the command line terminal (CLI) at the top right corner. Enter the router login [credentials](#credentials) again, and type: `clear dhcp leases`.
+ 3. The network can be restarted to be sure.
+
 ### DHIS2 and Nginx
 Problem | Solution
 ------- | --------
